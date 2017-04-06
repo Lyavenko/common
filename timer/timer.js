@@ -1,4 +1,4 @@
-var NDrops = 1000000;
+var NDrops = 3;
 var drops = [];
 var desiredFPS = 60;
 
