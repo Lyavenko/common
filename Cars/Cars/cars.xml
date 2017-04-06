@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<cars>
+  <brand>
+    <name>Audi</name>
+    <models>
+      <model>
+        <name>A4</name>
+      </model>
+      <model>
+        <name>A5</name>
+        <img src="fac35888fab8e.jpg"/>
+        <img src="23673a6cb3a62.jpg"/>
+      </model>
+    </models>
+  </brand>
+  <brand>
+    <name>Buick</name>
+    <models>
+      <model><name>Regal</name></model>
+      <model><name>Xaxal</name></model>
+    </models>
+  </brand>
+</cars>
