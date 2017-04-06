@@ -1,0 +1,2 @@
+c:\users\st\documents\visual studio 2013\Projects\XMLSortedDictionary\XMLSortedDictionary\bin\Debug\XMLSortedDictionary.exe.config
+D:\Max\XMLSortedDictionary\XMLSortedDictionary\bin\Debug\XMLSortedDictionary.exe.config
