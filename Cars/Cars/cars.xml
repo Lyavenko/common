@@ -16,8 +16,19 @@
   <brand>
     <name>Buick</name>
     <models>
-      <model><name>Regal</name></model>
-      <model><name>Xaxal</name></model>
+      <model>
+        <name>Regal</name>
+      </model>
+      <model>
+        <name>Xaxal</name>
+      </model>
+    </models>
+  </brand>
+  <brand>
+    <name>Citroen</name>
+    <models>
+      <model><name>C2</name></model>
+      <model><name>C4</name></model>
     </models>
   </brand>
 </cars>
