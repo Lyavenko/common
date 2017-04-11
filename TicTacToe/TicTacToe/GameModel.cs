@@ -18,6 +18,7 @@ namespace TicTacToe
          * нельзя ходить в занятую клетку
          */
 
+
         public enum Side
         {
             x,

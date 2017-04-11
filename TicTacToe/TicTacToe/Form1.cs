@@ -15,7 +15,7 @@ namespace TicTacToe
         private Button[,] fieldButtons;
         private GameModel model;
 
-        private Dictionary<GameModel.Side, string> symbols = new Dictionary<GameModel.Side, string>();
+        private Dictionary<GameModel.Side, Image> symbols = new Dictionary<GameModel.Side, Image>();
 
         public Form1()
         {
@@ -25,9 +25,9 @@ namespace TicTacToe
 
             model.UpdateView += model_UpdateView;
 
-            symbols[GameModel.Side.x] = "x";
-            symbols[GameModel.Side.o] = "o";
-            symbols[GameModel.Side.none] = "";
+            symbols[GameModel.Side.x] = Image.FromFile("C:\\Users\\st\\Documents\\Visual Studio 2013\\common\\common\\TicTacToe\\TicTacToe\\x.jpg");
+            symbols[GameModel.Side.o] = Image.FromFile("C:\\Users\\st\\Documents\\Visual Studio 2013\\common\\common\\TicTacToe\\TicTacToe\\0.jpg");
+            symbols[GameModel.Side.none] = Image.FromFile("C:\\Users\\st\\Documents\\Visual Studio 2013\\common\\common\\TicTacToe\\TicTacToe\\none.jpg");
 
             fieldButtons = new Button[3,3];
             for (int i = 0; i < fieldButtons.GetLength(0); i++)
@@ -40,6 +40,8 @@ namespace TicTacToe
                     b.Top = j * 55 + 20;
                     b.Left = i * 55 + 20;
                     b.Click += b_Click;
+                    b.Image = Image.FromFile("C:\\Users\\st\\Documents\\Visual Studio 2013\\common\\common\\TicTacToe\\TicTacToe\\none.jpg");
+                   // b.Image = Image.FromFile("C:\\Users\\st\\Documents\\Visual Studio 2013\\common\\common\\TicTacToe\\TicTacToe\\none.jpg");
                     this.Controls.Add(b);
                     fieldButtons[i, j] = b;
                 }
@@ -54,7 +56,8 @@ namespace TicTacToe
             {
                 for (int j = 0; j < fieldButtons.GetLength(1); j++)
                 {
-                    fieldButtons[i, j].Text = symbols[model.Field[i, j]];
+                    fieldButtons[i, j].Image = symbols[model.Field[i, j]];
+                   // fieldButtons[i, j].Image = Image.FromFile("C:\\Users\\st\\Documents\\Visual Studio 2013\\common\\common\\TicTacToe\\TicTacToe\\x.jpg");
                 }
             }
             toolStripStatusLabel1.Text = "Ходят " + symbols[model.CurrentTurn];
@@ -65,6 +68,11 @@ namespace TicTacToe
             Button b = (Button) sender;
             Point p = (Point) b.Tag;
             model.MakeMove(p.X,p.Y,model.CurrentTurn);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+        
         }
     }
 }
