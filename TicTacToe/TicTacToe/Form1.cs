@@ -57,7 +57,12 @@ namespace TicTacToe
                     fieldButtons[i, j].Text = symbols[model.Field[i, j]];
                 }
             }
-            toolStripStatusLabel1.Text = "Ходят " + symbols[model.CurrentTurn];
+            // если игра окончена
+            if (model.GameOver == true)
+            {
+                MessageBox.Show("Game is over! \n The winner is " + model.Winner.ToString() + model.GameOverResult);
+            }
+            else { toolStripStatusLabel1.Text = "Ходят " + symbols[model.CurrentTurn]; }
         }
 
         void b_Click(object sender, EventArgs e)

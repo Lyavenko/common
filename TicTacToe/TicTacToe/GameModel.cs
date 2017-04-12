@@ -20,7 +20,7 @@ namespace TicTacToe
 
         public enum Side
         {
-            x,
+            x = 0,
             o,
             none
         }
@@ -34,9 +34,24 @@ namespace TicTacToe
         public bool GameOver { get; private set; }
         public Side Winner { get; private set; }
         public int TurnCount{ get; private set; }
+        // добавила поле, которое будет принимать значение от 1 до 8, если произошел GameOver и есть победитель, 
+        // т.е. будет определять одну из 8 возможных комбинаций выигрыша
+        // переменная изначально инициализируется 0 и это значение остается, если произошла ничья
+        //0 - изначальная инициализация и ничья
+        //1 - совпадение верхнего ряда
+        //2 - соврадение среднего ряда
+        //3 - совпадение нижнего ряда
+        //4 - совпадение левого столбца
+        //5 - совпадение среднего столбца
+        //6 - совпадение правого столбца
+        //7 - совпадение диагонали левый верх - правый низ
+        //8 - совпадение диагонали правый верх - левый  низ
+
+        public int GameOverResult { get; private set; }
 
         public GameModel()
         {
+            GameOverResult = 0;
             TurnCount = 0;
             CurrentTurn = Side.x;
             Field = new Side[3,3];
@@ -84,7 +99,70 @@ namespace TicTacToe
             {
                 return;
             }
-            throw new NotImplementedException();
+            // 1
+            if (Field[0, 0] == Field[0, 1] && Field[0, 0] == Field[0, 2] && Field[0, 0] != Side.none)
+            {
+                GameOver = true;
+                Winner = CurrentTurn;
+                GameOverResult = 1;
+            }
+            // 2
+            else if (Field[1, 0] == Field[1, 1] && Field[1, 0] == Field[1, 2] && Field[1, 0] != Side.none)
+            {
+                GameOver = true;
+                Winner = CurrentTurn;
+                GameOverResult = 2;
+            }
+            // 3
+            else if (Field[2, 0] == Field[2, 1] && Field[2, 0] == Field[2, 2] && Field[2, 0] != Side.none)
+            {
+                GameOver = true;
+                Winner = CurrentTurn;
+                GameOverResult = 3;
+            }
+            //4
+            else if (Field[0, 0] == Field[1, 0] && Field[0, 0] == Field[2, 0] && Field[0, 0] != Side.none)
+            {
+                GameOver = true;
+                Winner = CurrentTurn;
+                GameOverResult = 4;
+            }
+            // 5
+            else if (Field[0, 1] == Field[1, 1] && Field[0, 1] == Field[2, 1] && Field[0, 1] != Side.none)
+            {
+                GameOver = true;
+                Winner = CurrentTurn;
+                GameOverResult = 5;
+            }
+            // 6
+            else if (Field[0, 2] == Field[1, 2] && Field[0, 2] == Field[2, 2] && Field[0, 2] != Side.none)
+            {
+                GameOver = true;
+                Winner = CurrentTurn;
+                GameOverResult = 6;
+            }
+            // 7
+            else if (Field[0, 0] == Field[1, 1] && Field[0, 0] == Field[2, 2] && Field[0, 0] != Side.none)
+            {
+                GameOver = true;
+                Winner = CurrentTurn;
+                GameOverResult = 7;
+            }
+            // 8
+            else if (Field[0, 2] == Field[1, 1] && Field[0, 2] == Field[2, 0] && Field[0, 2] != Side.none)
+            {
+                GameOver = true;
+                Winner = CurrentTurn;
+                GameOverResult = 8;
+            }
+            // ничья
+            if (TurnCount == 9 && GameOverResult == 0)
+            {
+                GameOver = true;
+                Winner = Side.none;
+            }
         }
+
+        
     }
 }
