@@ -36,6 +36,8 @@ namespace TicTacToe
         public Side Winner { get; private set; }
         public int TurnCount{ get; private set; }
 
+        public int GameOverResult = 0;
+
         public GameModel()
         {
             TurnCount = 0;
@@ -79,7 +81,7 @@ namespace TicTacToe
                 UpdateView(this);
         }
 
-        private void CheckGameOver()
+        public void CheckGameOver()
         {
             if (TurnCount < 5)
             {
