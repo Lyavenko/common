@@ -21,13 +21,21 @@ namespace TicTacToe
         {
             InitializeComponent();
 
-            model = new GameModel();
+            Button start = new Button();
+            start.Text = "Новая игра";
+            start.Size = new Size(80, 50);
+            start.Top = 20;
+            start.Left = 200;
+            start.Click += start_Click;
+            this.Controls.Add(start);
 
-            model.UpdateView += model_UpdateView;
+            model = new GameModel();
 
             symbols[GameModel.Side.x] = Image.FromFile("..\\..\\x.jpg");
             symbols[GameModel.Side.o] = Image.FromFile("..\\..\\0.jpg");
             symbols[GameModel.Side.none] = Image.FromFile("..\\..\\none.jpg");
+
+            model.UpdateView += model_UpdateView;
 
             fieldButtons = new Button[3,3];
             for (int i = 0; i < fieldButtons.GetLength(0); i++)
@@ -46,6 +54,14 @@ namespace TicTacToe
                 }
             }
 
+        }
+
+        void start_Click(object sender, EventArgs e)
+        {
+            GameModel NewGame = new GameModel();
+            model = NewGame;
+            model_UpdateView(model);
+            model.UpdateView += model_UpdateView;
         }
 
 
