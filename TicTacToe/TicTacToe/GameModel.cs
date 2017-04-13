@@ -18,6 +18,7 @@ namespace TicTacToe
          * нельзя ходить в занятую клетку
          */
 
+
         public enum Side
         {
             x,
@@ -34,6 +35,8 @@ namespace TicTacToe
         public bool GameOver { get; private set; }
         public Side Winner { get; private set; }
         public int TurnCount{ get; private set; }
+
+        public int GameOverResult = 0;
 
         public GameModel()
         {
@@ -78,7 +81,7 @@ namespace TicTacToe
                 UpdateView(this);
         }
 
-        private void CheckGameOver()
+        public void CheckGameOver()
         {
             if (TurnCount < 5)
             {
