@@ -50,7 +50,6 @@ namespace TicTacToe
 
         public int GameOverResult { get; private set; }
 
-        public int GameOverResult = 0;
 
         public GameModel()
         {
