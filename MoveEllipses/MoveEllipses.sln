@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoveEllipses", "MoveEllipses\MoveEllipses.csproj", "{DA106469-BF72-424D-B221-1E28E00B87AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA106469-BF72-424D-B221-1E28E00B87AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA106469-BF72-424D-B221-1E28E00B87AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA106469-BF72-424D-B221-1E28E00B87AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA106469-BF72-424D-B221-1E28E00B87AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
