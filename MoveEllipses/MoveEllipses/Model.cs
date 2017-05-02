@@ -19,6 +19,13 @@ namespace MoveEllipses
             this.sp = sp;
         }
 
+        public void Paint()
+        {
+            foreach (Shape s in shapes)
+            {
+                s.Paint();
+            }
+        }
 
         public List<Shape> shapes = new List<Shape>();
 
