@@ -15,19 +15,36 @@ namespace TicTacToe
         private Button[,] fieldButtons;
         private GameModel model;
 
+        Button VictoryLine = new Button();
+        Button DiagonalVictoryLine1 = new Button(); // a
+        Button DiagonalVictoryLine2 = new Button(); //c
+
         private Dictionary<GameModel.Side, Image> symbols = new Dictionary<GameModel.Side, Image>();
+        private Dictionary<GameModel.Side, string> symbols1 = new Dictionary<GameModel.Side, string>();
 
         public Form1()
         {
             InitializeComponent();
 
-            model = new GameModel();
+            Button start = new Button();
+            start.Text = "Новая игра";
+            start.Size = new Size(80, 50);
+            start.Top = 20;
+            start.Left = 200;
+            start.Click += start_Click;
+            this.Controls.Add(start);
 
-            model.UpdateView += model_UpdateView;
+            model = new GameModel();
 
             symbols[GameModel.Side.x] = Image.FromFile("..\\..\\x.jpg");
             symbols[GameModel.Side.o] = Image.FromFile("..\\..\\0.jpg");
             symbols[GameModel.Side.none] = Image.FromFile("..\\..\\none.jpg");
+
+            symbols1[GameModel.Side.x] = "x";
+            symbols1[GameModel.Side.o] = "o";
+            symbols1[GameModel.Side.none] = " ";
+
+            model.UpdateView += model_UpdateView;
 
             fieldButtons = new Button[3,3];
             for (int i = 0; i < fieldButtons.GetLength(0); i++)
@@ -45,6 +62,18 @@ namespace TicTacToe
                     fieldButtons[i, j] = b;
                 }
             }
+            toolStripStatusLabel1.Text = "Ходят x";
+        }
+
+        void start_Click(object sender, EventArgs e)
+        {
+            GameModel NewGame = new GameModel();
+            model = NewGame;
+            model_UpdateView(model);
+            model.UpdateView += model_UpdateView;
+            this.Controls.Remove(DiagonalVictoryLine1);
+            this.Controls.Remove(VictoryLine);
+            this.Controls.Remove(DiagonalVictoryLine2);
 
         }
 
@@ -59,7 +88,7 @@ namespace TicTacToe
                 }
             }
             drawVictoryLine(); // зачеркивает крестики (нолики) победителя
-            toolStripStatusLabel1.Text = "Ходят " + symbols[model.CurrentTurn];
+            toolStripStatusLabel1.Text = "Ходят " + symbols1[model.CurrentTurn];
         }
 
         void b_Click(object sender, EventArgs e)
@@ -70,117 +99,113 @@ namespace TicTacToe
         }
         public void drawVictoryLine()
         {
-            if (model.GameOverResult == 0)
+            if (model.TurnCount == 9 && model.GameOverResult == 0)
             {
                 MessageBox.Show("Ничья!");
             }
-            if (model.GameOverResult == 4 || model.GameOverResult == 5 || model.GameOverResult == 6)
-            {
-                Button b = new Button();
-                b.Size = new Size(7, 156);
-                b.BackColor = Color.Transparent;
-                this.Controls.Add(b);
-                b.BringToFront();
-                b.Enabled = false;
-                b.FlatStyle = FlatStyle.Flat;
-                b.FlatAppearance.BorderSize = 0;
-                if (model.GameOverResult == 4)
-                {
-                    b.BackColor = Color.Black;
-                    b.Top = 22;
-                    b.Left = 42;
-                }
-                if (model.GameOverResult == 5)
-                {
-                    b.BackColor = Color.Black;
-                    b.Top = 22;
-                    b.Left = 42 + 55;
-                }
-                if (model.GameOverResult == 6)
-                {
-                    b.BackColor = Color.Black;
-                    b.Top = 22;
-                    b.Left = 42 + 55 + 55;
-                }
-            }
             if (model.GameOverResult == 1 || model.GameOverResult == 2 || model.GameOverResult == 3)
             {
-                Button b = new Button();
-                b.Size = new Size(156, 7);
-                b.BackColor = Color.Transparent;
-                this.Controls.Add(b);
-                b.BringToFront();
-                b.Enabled = false;
-                b.FlatStyle = FlatStyle.Flat;
-                b.FlatAppearance.BorderSize = 0;
+                VictoryLine.Size = new Size(7, 156);
+                VictoryLine.BackColor = Color.Transparent;
+                this.Controls.Add(VictoryLine);
+                VictoryLine.BringToFront();
+                VictoryLine.Enabled = false;
+                VictoryLine.FlatStyle = FlatStyle.Flat;
+                VictoryLine.FlatAppearance.BorderSize = 0;
                 if (model.GameOverResult == 1)
                 {
-                    b.BackColor = Color.Black;
-                    b.Top = 42;
-                    b.Left = 22;
+                    VictoryLine.BackColor = Color.Black;
+                    VictoryLine.Top = 22;
+                    VictoryLine.Left = 42;
                 }
                 if (model.GameOverResult == 2)
                 {
-                    b.BackColor = Color.Black;
-                    b.Top = 42 + 55;
-                    b.Left = 22;
+                    VictoryLine.BackColor = Color.Black;
+                    VictoryLine.Top = 22;
+                    VictoryLine.Left = 42 + 55;
                 }
                 if (model.GameOverResult == 3)
                 {
-                    b.BackColor = Color.Black;
-                    b.Top = 42 + 55 + 55;
-                    b.Left = 22;
+                    VictoryLine.BackColor = Color.Black;
+                    VictoryLine.Top = 22;
+                    VictoryLine.Left = 42 + 55 + 55;
+                }
+            }
+            if (model.GameOverResult == 4 || model.GameOverResult == 5 || model.GameOverResult == 6)
+            {
+                VictoryLine.Size = new Size(156, 7);
+                VictoryLine.BackColor = Color.Transparent;
+                this.Controls.Add(VictoryLine);
+                VictoryLine.BringToFront();
+                VictoryLine.Enabled = false;
+                VictoryLine.FlatStyle = FlatStyle.Flat;
+                VictoryLine.FlatAppearance.BorderSize = 0;
+                if (model.GameOverResult == 4)
+                {
+                    VictoryLine.BackColor = Color.Black;
+                    VictoryLine.Top = 42;
+                    VictoryLine.Left = 22;
+                }
+                if (model.GameOverResult == 5)
+                {
+                    VictoryLine.BackColor = Color.Black;
+                    VictoryLine.Top = 42 + 55;
+                    VictoryLine.Left = 22;
+                }
+                if (model.GameOverResult == 6)
+                {
+                    VictoryLine.BackColor = Color.Black;
+                    VictoryLine.Top = 42 + 55 + 55;
+                    VictoryLine.Left = 22;
                 }
             }
             if (model.GameOverResult == 7 || model.GameOverResult == 8)
             {
-                Button b = new Button();
-                b.Size = new Size(47, 7);
-                b.BackColor = Color.Transparent;
-                this.Controls.Add(b);
-                b.BringToFront();
-                b.Enabled = false;
-                b.FlatStyle = FlatStyle.Flat;
-                b.FlatAppearance.BorderSize = 0;
+                VictoryLine.Size = new Size(47, 7);
+                VictoryLine.BackColor = Color.Transparent;
+                this.Controls.Add(VictoryLine);
+                VictoryLine.BringToFront();
+                VictoryLine.Enabled = false;
+                VictoryLine.FlatStyle = FlatStyle.Flat;
+                VictoryLine.FlatAppearance.BorderSize = 0;
 
-                Button a = new Button();
-                a.Size = new Size(47, 7);
-                a.BackColor = Color.Transparent;
-                this.Controls.Add(a);
-                a.BringToFront();
-                a.Enabled = false;
-                a.FlatStyle = FlatStyle.Flat;
-                a.FlatAppearance.BorderSize = 0;
+                DiagonalVictoryLine1.Size = new Size(47, 7);
+                DiagonalVictoryLine1.BackColor = Color.Transparent;
+                this.Controls.Add(DiagonalVictoryLine1);
+                DiagonalVictoryLine1.BringToFront();
+                DiagonalVictoryLine1.Enabled = false;
+                DiagonalVictoryLine1.FlatStyle = FlatStyle.Flat;
+                DiagonalVictoryLine1.FlatAppearance.BorderSize = 0;
 
-                Button c = new Button();
-                c.Size = new Size(47, 7);
-                c.BackColor = Color.Transparent;
-                this.Controls.Add(c);
-                c.BringToFront();
-                c.Enabled = false;
-                c.FlatStyle = FlatStyle.Flat;
-                c.FlatAppearance.BorderSize = 0;
-                a.BackColor = Color.Black;
-                a.Top = 42 + 55;
-                a.Left = 22 + 55;
+
+                DiagonalVictoryLine2.Size = new Size(47, 7);
+                DiagonalVictoryLine2.BackColor = Color.Transparent;
+                this.Controls.Add(DiagonalVictoryLine2);
+                DiagonalVictoryLine2.BringToFront();
+                DiagonalVictoryLine2.Enabled = false;
+                DiagonalVictoryLine2.FlatStyle = FlatStyle.Flat;
+                DiagonalVictoryLine2.FlatAppearance.BorderSize = 0;
+                DiagonalVictoryLine1.BackColor = Color.Black;
+                DiagonalVictoryLine1.Top = 42 + 55;
+                DiagonalVictoryLine1.Left = 22 + 55;
                 if (model.GameOverResult == 7)
                 {
-                    b.BackColor = Color.Black;
-                    c.BackColor = Color.Black;
+                    VictoryLine.BackColor = Color.Black;
+                    DiagonalVictoryLine2.BackColor = Color.Black;
 
-                    b.Top = 42;
-                    b.Left = 22;
-                    c.Top = 42 + 55 + 55;
-                    c.Left = 22 + 55 + 55;
+                    VictoryLine.Top = 42;
+                    VictoryLine.Left = 22;
+                    DiagonalVictoryLine2.Top = 42 + 55 + 55;
+                    DiagonalVictoryLine2.Left = 22 + 55 + 55;
                 }
                 if (model.GameOverResult == 8)
                 {
-                    b.BackColor = Color.Black;
-                    c.BackColor = Color.Black;
-                    b.Top = 42;
-                    b.Left = 22 + 55 + 55;
-                    c.Top = 42 + 55 + 55;
-                    c.Left = 22;
+                    VictoryLine.BackColor = Color.Black;
+                    DiagonalVictoryLine2.BackColor = Color.Black;
+                    VictoryLine.Top = 42;
+                    VictoryLine.Left = 22 + 55 + 55;
+                    DiagonalVictoryLine2.Top = 42 + 55 + 55;
+                    DiagonalVictoryLine2.Left = 22;
                 }
 
             }
